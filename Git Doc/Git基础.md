@@ -15,6 +15,14 @@ git init
 git clone <url>
 ```
 
+### 添加远程仓库
+
+``` shell
+git remote add <shortname> <url>	
+```
+
+
+
 ### 暂存
 
 #### 暂存文件
