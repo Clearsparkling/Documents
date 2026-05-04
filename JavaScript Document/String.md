@@ -1,0 +1,88 @@
+## String常用方法
+
+``` javascript
+let str = "JavaScript"
+
+str.length
+
+// 小写
+str.toLocaleLowerCase()
+
+// 大写
+str.toLocaleUpperCase()
+
+// 返回传入值对应下标的数据
+str.charAt()
+
+// 返回传入值对应下表的UniCode码
+str.charCodeAt()
+
+// 截取对应区间的子字符串 包括Start 不包括End
+// strat,end 值为负数时 取值为 (length + start),(length + end)
+str.slice(start,end)
+
+// 截取对应区间的子字符串 包括Start 不包括End
+// 第一个参数为负数时直接转换为0
+// 第二个参数为可选值 为空时自动默认输出从Start到结尾的子字符串
+// 第二个值为负数时直接转换为0
+str.substring(start,end)
+
+// 截取对应区间的子字符串 Start length
+str.substr(2,10)
+
+// 字符串结尾添加新字符串
+str.concat("")
+// 平常不用 直接 str + "新字符串"
+
+// 去除首尾空格
+str.trim()
+// 去除首空格
+str.trimStart()
+// 去除尾空格
+str.trimEnd()
+
+// 替换对应字符串 
+// 可使用正则表达式
+str.replace(匹配项,替换值)
+str.replace(/a/,"****")//替换全部的a
+
+// 分割 转换为数组
+str.split("用于分割字符串的字符串")
+
+```
+
+## Array常用方法
+
+
+
+# Promise
+
+
+
+
+
+## Async Await
+
+### 使用Async声明异步函数
+
+``` typescript
+const Promise = async (() => {
+    //使用async声明的异步函数返回对象为Promise对象
+})
+```
+
+### Async需搭配Await使用
+
+``` typescript
+const Promis = async ((value:String) => {
+    //可使用await调用异步函数
+    //await会等待Promise完成之后返回最终的结果
+    await axios.get('',{
+        params:{
+            value : value
+        }
+    })
+    //被await声明的函数或方法，在被调用时，需等待Promise执行完毕后才会被调用
+})
+```
+
