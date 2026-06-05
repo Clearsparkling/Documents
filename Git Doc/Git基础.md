@@ -21,6 +21,14 @@ git clone <url>
 git remote add <shortname> <url>	
 ```
 
+### 拉取代码
+
+默认拉取当前分支
+
+``` shell
+git pull
+```
+
 
 
 ### 暂存
