@@ -144,6 +144,20 @@ git log --patch
 
 # 显示简略的提交信息
 git log -s
-git log --stat
+git log --stat	
 ```
 
+### 分支
+
+#### 创建新分支
+
+``` shell
+git switch -c/-create <branch(分支)>
+```
+
+#### 切换分支
+
+``` shell
+# git2.23引入新特性
+git switch <branch(分支)>
+```

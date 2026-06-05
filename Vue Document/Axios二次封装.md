@@ -49,21 +49,48 @@ Son.vue
 <script>
     
     
-    //使用defineProps解构传递的Props
-    //使用此方法解构Props不会丢失响应式
+    // 使用defineProps解构传递的Props
+    // 使用此方法解构Props不会丢失响应式
 	const props = defineProps({
         name:String,
         password:String
     })
     
     
-    //使用此方法解构Props在Vue3.5版本之前会丢失响应式
-    //在Vue3.5版本之后，使用此方法解构Props不会丢失响应式
+    // 使用此方法解构Props在Vue3.5版本之前会丢失响应式
+    // 在Vue3.5版本之后，使用此方法解构Props不会丢失响应式
     const {name,password} = defineProps({
-        name:String,
-        password:String
+        name: String,
+        password: String
     })
     
+    // 以上两种方法在使用Vue + TypeScript的时候都不推荐使用
+    // 在使用TypeScript时候 更推荐使用“基于类型的声明”
+    const props = defineProps<{
+        foo: string
+        bar?: number
+    }>
+          
+    // 或者将Props的类型移入单独的接口
+    interface Props {
+        foo: string
+        bar?: number
+    }
+        
+    const props = defineProps<Props>()
+    
+    // 但在使用“基于类型的声明”时，我们失去了声明默认值的能力
+    // 但可以通过响应式Props解构解决
+    
+    // 在Vue3.5+ 版本中
+    const { msg = 'hello' ,lables = ['one', 'two'] } = defineProps<Props>()
+    
+    // 在Vue3.4 及以下版本中
+    const props = withDefaults(defineProps<Props>(),{
+    	msg: 'hello',
+    	lables: () => ['one', 'two']
+    })
+   
    
     const props = defineProps({
         name:{
