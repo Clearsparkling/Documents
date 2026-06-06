@@ -325,3 +325,24 @@ server:{
 }
 ```
 
+
+
+## 模版引用
+
+### 访问模版引用
+
+**在Vue3.5之后使用TypeScript时使用useTemplateRef可以获得自动类型推断**
+
+``` typescript
+const el = useTemplateRef<HTMLElement>('el')
+```
+
+**在Vue3.5之前需要一个显式指定的泛型和一个初始值null来创建**
+
+``` typescript
+// Vue3.5之前变量名需与模版里的ref同名
+const el = ref<HTMLElement | null>(null)
+```
+
+
+
