@@ -57,10 +57,6 @@ str.split("用于分割字符串的字符串")
 
 # Promise
 
-
-
-
-
 ## Async Await
 
 ### 使用Async声明异步函数
@@ -85,4 +81,6 @@ const Promis = async ((value:String) => {
     //被await声明的函数或方法，在被调用时，需等待Promise执行完毕后才会被调用
 })
 ```
+
+# forEach
 

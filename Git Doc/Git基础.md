@@ -2,14 +2,14 @@
 
 ## Git基础命令
 
-#### 初始化git仓库
+### 初始化git仓库
 
 ``` shell
 cd "/url"
 git init
 ```
 
-#### 克隆现有仓库
+### 克隆现有仓库
 
 ``` shell
 git clone <url>
@@ -29,8 +29,6 @@ git remote add <shortname> <url>
 git pull
 ```
 
-
-
 ### 暂存
 
 #### 暂存文件
@@ -45,17 +43,15 @@ git add <file>
 git reset HEAD<file>
 ```
 
+### 检查当前文件状态
 
-
-#### 检查当前文件状态
-
-##### 全量状态
+#### 全量状态
 
 ``` shell
 git status
 ```
 
-##### 简略状态
+#### 简略状态
 
 ``` shell
 git status -s
@@ -81,10 +77,37 @@ git commit
 git commit -a
 ```
 
+#### vim常用命令
+
+``` shell
+# 进入插入模式
+i
+
+# 返回普通模式
+esc
+
+# 保存并推出
+:wq
+
+# 强制退出不保存
+:q!
+
+# 仅保存不推出
+:w
+```
+
 #### 撤销提交
 
 ``` shell
 git commit --amend
+```
+
+### 推送
+
+#### 将已提交的分支推送到云端分支
+
+``` shell
+git push
 ```
 
 #### 将工作区的文件恢复到最近一次提交状态
@@ -102,8 +125,6 @@ git checkout -- .
 # 在Git 2.23 后，官方文档更推荐使用以下命令来恢复工作区的文件
 git restore
 ```
-
-
 
 #### 移除文件
 
