@@ -23,7 +23,7 @@ git remote add <shortname> <url>
 
 ### 拉取代码
 
-默认拉取当前分支
+#### 默认拉取当前分支
 
 ``` shell
 git pull
@@ -177,6 +177,13 @@ git log --stat
 ```
 
 ### 分支
+
+#### 查看所有分支
+
+``` shell
+git branch
+# 按q退出
+```
 
 #### 创建新分支
 
