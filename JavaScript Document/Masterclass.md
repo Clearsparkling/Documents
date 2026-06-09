@@ -90,3 +90,79 @@ EventLoop是一个持续循环的过程，它在Chrome的原码中，它会开�
 
 # 渲染原理
 
+## 浏览器是如何渲染页面的？
+
+当浏览的网络线程收到HTML文档后，会产生一个渲染任务，并将其传递给渲染主线程的消息队列。
+
+在事件循环的机制作用下，渲染主线程从取出消息队列中的渲染任务，开启渲染流程。
+
+![image-20260609231617445](Masterclass.assets/image-20260609231617445.png)
+
+> [!NOTE]
+>
+> 整个渲染流程分为多个阶段，分别是：HTML解析，样式计算，布局，分层，绘制，分块，光栅化，画。
+>
+> 每个阶段都有明确的输入输出，上一个阶段的输出会成为下一个阶段的输入。
+>
+> 这样，整个渲染流程就形成了一套组织严密的生产流水线。
+
+### 解析HTML - Parse HTML
+
+创建DOM树(*Document Object Model Tree*)
+
+创建CSSOM树(*CSS Object Model Tree*)
+
+![image-20260609232932594](Masterclass.assets/image-20260609232932594.png)
+
+为了提高效率，浏览器会启动一个预下载器率先下载和解析CSS
+
+![image-20260609234700232](Masterclass.assets/image-20260609234700232.png)
+
+#### 如遇外部CSS
+
+如果主线程解析到*link*位置，此时外部的CSS文件还没有下载解析好，主线程不会等待，继续解析后续的HTML
+
+#### 如遇JavaScript
+
+渲染主线程遇到JavaScript时必须暂停一切行为，等待下载执行完成后才能继续
+
+> [!NOTE]
+>
+> 在JavaScript执行的过程中有可能会修改当前的DOM树，所以DOM树的生成必须暂停
+
+![image-20260609235454496](Masterclass.assets/image-20260609235454496.png)
+
+### 样式计算 - Recalculate Style
+
+主线程会遍历得到DOM树，依次为DOM树中的每个节点计算出它的最终的样式，称之为*Computed Style*
+
+在这过程中，很多预设值会变为绝对值，例如red会变成rgb(255,0,0);
+
+相对单位会变成绝对单位，比如em会计算后变成px
+
+**这一步结束之后，会得到一颗带有样式的DOM树**
+
+![image-20260610000714801](Masterclass.assets/image-20260610000714801.png)
+
+### 布局 - Layout
+
+
+
+### 分层 - Layer
+
+
+
+### 绘制 - Paint
+
+
+
+### 分块 - Tiling
+
+
+
+### 光栅化 - Raster
+
+
+
+### 画 - Draw
+
