@@ -1,4 +1,4 @@
-# JavaScript
+# 	JavaScript
 
 ### Closure(闭包)
 
@@ -86,4 +86,3 @@ funcation onClick() {
   fn = null
 }
 ```
-
