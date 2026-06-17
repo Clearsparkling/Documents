@@ -56,7 +56,16 @@ str.split("用于分割字符串的字符串")
 ## Array常用实例方法
 
 ``` javascript
+// 循环遍历
+arr.forEach((item,index,array):undefined => {
+  
+})
+
 // 筛选
+arr.filter((item,index,array):boolean => {
+  // 如果返回值为真，将此项数据浅拷贝
+})
+
 ```
 
 
@@ -64,7 +73,44 @@ str.split("用于分割字符串的字符串")
 ## Map常用实例方法
 
 ``` javascript
-// 
+// 添加/修改
+// 返回值为整个map对象
+map.set(key,value):map
+
+// 获取
+// 返回值为该键对应的值或undefined
+map.get(key):value | undefined
+
+// 删除指定元素
+// 元素存在且移除返回true 元素不存在返回false
+map.delete(key):boolean
+
+// 清除map中所有元素
+map.clear():undefined
+
+// getOrInsert
+// 如果map中存在该键则返回对应的value，如果不存在则添加该键设置并返回defaultValue
+map.getOrInsert(key,defaultValue):value | defaultValue
+
+// 循环遍历
+map.forEach((value,key,map):undefined => {
+    
+})
+
+// 返回迭代对象
+// 返回key的迭代对象
+map.keys():Iterator
+
+// 返回valude的迭代对象
+map.values():Iterator
+
+// 返回key，value的迭代对象
+map.entries():Iterator
+
+// 查询指定元素
+// 方法返回一个布尔值，如果对象中具有指定键的元素，则返回true
+map.has(key):boolean
+
 ```
 
 # Promise
@@ -94,5 +140,5 @@ const Promis = async ((value:String) => {
 })
 ```
 
-# forEach
+
 
