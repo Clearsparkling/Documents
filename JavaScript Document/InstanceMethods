@@ -1,4 +1,6 @@
-## String常用方法
+# 实例方法
+
+## String常用实例方法
 
 ``` javascript
 let str = "JavaScript"
@@ -51,9 +53,19 @@ str.split("用于分割字符串的字符串")
 
 ```
 
-## Array常用方法
+## Array常用实例方法
+
+``` javascript
+// 筛选
+```
 
 
+
+## Map常用实例方法
+
+``` javascript
+// 
+```
 
 # Promise
 

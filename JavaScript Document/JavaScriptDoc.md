@@ -1,5 +1,100 @@
 # 	JavaScript
 
+## 函数
+
+### 参数
+
+#### 动态参数
+
+``` javascript
+function fu() {
+    arguments
+}
+```
+
+已经不再建议在TS中使用动态参数了，在TS中无法声明动态参数的类型，且动态参数是一个伪数组无法使用数组内的方法
+
+#### 剩余参数
+
+在TS中更加推荐使用剩余参数获取
+
+``` typescript
+function fu(...args: (number | string)[]) {
+    args.forEach((value) => {
+        console.log(value)
+    })
+}
+```
+
+### this指向问题
+
+#### 在原始的函数写法中
+
+**普通函数的this在调用时定义**：普通函数的this指向调用者
+
+##### 此时的this指向调用者
+
+``` javascript
+function whoThis () {
+  console.log(this)
+}
+
+whoThis() // window
+```
+
+##### 我们来嵌套的更加深入一点
+
+``` javascript
+const obj = {
+  oname: "value",
+  sayHi: function () {
+    console.log(this)
+  }
+}
+
+obj.sayHi() // obj
+```
+
+此时的this指向依然是调用者
+
+#### 在箭头函数写法中
+
+**箭头函数的this在定义时确定**：箭头函数继承外层的this
+
+##### 此时的this指向最近作用域的this
+
+``` javascript
+const whoThis = () => {
+    console.log(this)
+}
+```
+
+##### 依旧是更加深入一点
+
+```javascript
+const obj = { // 对象字面量并不生成词法作用域
+    oname: "张昱",
+    sayHi: () => {
+        console.log(this) // window
+    }
+}
+```
+
+##### 再更加深入一点点
+
+```javascript
+const obj = {
+    oname: "张昱",
+    fn: function () { // 生成了词法作用域 所以箭头函数的this继承了fn的this，fn的调用者是obj，所以fn的this指向的是obj
+        let i = 0
+        const fun = () => {
+            console.log(this) // obj
+        }
+        fun()
+    }
+}
+```
+
 ### Closure(闭包)
 
 #### 闭包
@@ -86,3 +181,4 @@ funcation onClick() {
   fn = null
 }
 ```
+
