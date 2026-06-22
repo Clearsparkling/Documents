@@ -197,3 +197,12 @@ git switch -c/-create <branch(分支)>
 # git2.23引入新特性
 git switch <branch(分支)>
 ```
+
+## Git设置
+
+### 修改默认不区分大小写
+
+``` shell
+  git config core.ignorecase false
+```
+

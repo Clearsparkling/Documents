@@ -95,6 +95,25 @@ const obj = {
 }
 ```
 
+### 构造函数
+
+#### JavaScript中构造函数的基本格式
+
+``` javascript
+function Constructor (name,age) {
+  this.name = name
+  this.age = age
+}
+
+Constructor.prototype.fn = function () {
+  console.log("Value")
+}
+```
+
+#### 构造函数中的this指向
+
+同**普通函数**一样构造函数中的this指向的都是调用者，同样的**原型对象**中的this也是指向调用者
+
 ### Closure(闭包)
 
 #### 闭包

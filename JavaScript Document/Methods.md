@@ -218,6 +218,22 @@ arr.keys()
  */
 arr.values()
 
+/**
+ * 将数组内的所有数据拼接成字符串返回
+ * @returns String
+ */
+arr.join('/')
+
+/**
+ * @callback 
+ * @param element - 当前元素
+ * @param index - 当前索引
+ * @param array - 当前数组
+ * @returns 返回处理后的新数组
+ */
+arr.map((element,index,array) => {
+    return 
+})
 ```
 
 ## Map常用实例方法
