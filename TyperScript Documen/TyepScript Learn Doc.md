@@ -68,3 +68,28 @@ interface TypeTestList<TypeTest> {
 }
 ```
 
+
+
+## Prototyep
+
+### 在TypeScript中给原型对象新增方法时报错解决方法
+
+#### 在需要使用的组件内导入即可
+
+``` typescript
+src/types/array.d.ts
+
+interface Array<T> {
+  sum(this: number[]): number
+}
+
+
+
+src/utils/array.ts
+
+Array.prototype.sum = function (this: number[]) {
+  return this.reduce((prev,curr) => {
+    return prev + curr
+  },0)
+}
+```
