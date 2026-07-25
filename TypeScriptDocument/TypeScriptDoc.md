@@ -25,6 +25,20 @@ const numbers: (number | string)[] = [1,2,s,3,4]
 const numbers: Array<number> = [1,2,3,4,5]
 ```
 
+### 对象类型注解
+
+```typescript
+const Object: {
+  key: string,
+  value: string,
+  fn(key: string): void,
+  // 函数的注解还有第二种方式
+  fn:(key: string) => voidx
+}
+```
+
+
+
 ## 联合类型注解
 
 当一个变量的类型不止一种的时候就可以使用联合类型，联合类型的语法为 | 
@@ -89,6 +103,8 @@ interface ResponseParams {
 
 ## Function类型注解
 
+### 基础函数类型注解
+
 ```  typescript
 // 参数类型注解
 function TypeTest(value: string) {
@@ -129,6 +145,14 @@ interface ParamsType {
   fn:(key: string,value: string) => string
 }
 ```
+
+### 可选参数
+
+在可传可不传的参数名称后添加 ? （问号）即可声明该参数是可选参数
+
+> [!WARNING]
+>
+> 可选参数禁止出现在必选参数的前面
 
 ## Type Guards / 类型守卫
 
