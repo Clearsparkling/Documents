@@ -336,3 +336,49 @@ const Promis = async ((value:String) => {
     //被await声明的函数或方法，在被调用时，需等待Promise执行完毕后才会被调用
 })
 ```
+
+### Async声明异步函数
+
+在使用async声明异步函数后，函数内的**异步代码**并不会阻碍函数外的同步代码的执行
+
+在async函数中，遇到await声明的Promise
+
+```typescript
+async function asyncFunction() {
+    console.log('A')
+    await new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('B')
+            resolve('')
+        }, 2000);
+    })
+    console.log('C')
+    
+}
+asyncFunction()
+console.log('D')
+
+// A D B C
+```
+
+在async声明的异步函数中，如没有声明await的异步Promise，则不会等待。
+
+```typescript
+async function asyncFunction() {
+    console.log('A')
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('B')
+            resolve('')
+        }, 2000)
+        console.log("E")
+    })
+    console.log('C')
+    
+}
+asyncFunction()
+console.log('D')
+
+// A E C D B
+```
+

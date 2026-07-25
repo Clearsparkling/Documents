@@ -205,7 +205,38 @@ console.log(Object.getPrototypeOf(arr).constructor === Array) // true
 
 ##### 原型链
 
+在构造函数中，**prototype**属性指向该函数的原型对象(prototype),在原型对象中会有\_\_proto\_\_属性指向原型对象(prototype)的对象原型。
+
+在原型对象中，constructor的属性会指向构造函数(Constructor),其原型链和上方所述一致。
+
+Object的对象原型为null
+
 ![image-20260622215826573](JavaScriptDoc.assets/image-20260622215826573.png)
+
+![image-20260623103421035](JavaScriptDoc.assets/image-20260623103421035.png)
+
+##### instanceof用于检测构造函数的prototype属性是否出现在某个实例对象(instance object)的原型链(prototype chain)上
+
+例：
+
+```javascript
+function Star() {
+  
+}
+
+const Cxk = new Star()
+
+console.log(cxl instanceof Star) // true
+console.log(cxl instanceof Object) // true
+```
+
+### 拷贝
+
+#### 浅拷贝
+
+
+
+​	
 
 ### Closure(闭包)
 
@@ -291,6 +322,44 @@ let b = fn()
 funcation onClick() {
   b = null
   fn = null
+}
+```
+
+### 防抖与节流
+
+#### 防抖(debounce)
+
+在指定时间内触发多次只执行最后一个
+
+```typescript
+const debounce = (fn: function,t: number) => {
+  const timer : number | null
+  return () => {
+    if(timer) {
+     	clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      fn()
+    }, t)
+  }
+}
+```
+
+#### 节流(throttle)
+
+在指定时间内，只触发一次，在当前触发结束之后才可继续触发
+
+```typescript
+const throttle = (fn: function,t: number) => {
+  const timer: number | null
+  return () => {
+    if(!timer){
+      setTimeout(() => {
+        fn()
+      }, t)
+      timer = null
+    } 
+  }
 }
 ```
 
