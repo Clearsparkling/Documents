@@ -227,16 +227,8 @@ function Star() {
 const Cxk = new Star()
 
 console.log(cxl instanceof Star) // true
-console.log(cxl instanceof Object) // true
+console.log(cxl instanceof Object) // true	
 ```
-
-### 拷贝
-
-#### 浅拷贝
-
-
-
-​	
 
 ### Closure(闭包)
 
