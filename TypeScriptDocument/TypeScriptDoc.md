@@ -837,13 +837,170 @@ type Type = {
 type TypeA = Type['y']
 // TypeA 的类型
 type TypeA = number
+
+// 或查询多个类型
+type TypeB = Type[keyof Type]
 ```
 
+## 类型声明文件
 
+现如今所有的JavaScript应用都会引入许多第三方库来完成需求。
 
+这些第三方库不管是否是使用TypeScript编写的在最终发布时都必须编译成JavaScript代码才能供开发者使用。
 
+我们知道是TS提供了类型，才有了代码提示和类型保护等机制。
 
+但在项目开发中使用第三方库时，你会发现它们几乎都有相应的TS类型，这些类型都是通过**类型声明文件**来为已存在的Js库提供类型信息
 
+这样在TS项目中使用这些库时，就像用TS一样，都会有代码提示、类型保护等机制。
+
+**类型声明文件的后缀** ：**.d.ts**
+
+在**.d.ts**类型声明文件中，不得编写可执行代码
+
+```typescript
+// 类型声明文件
+
+// 类型
+type Props = { x: number, y: number }
+
+// 错误演示：.d.ts 文件中，不能出现可执行代码（代码实现）
+// 可执行代码
+function add(num1: number, num2: number) {
+    return num1 + num2
+}
+
+console.log(add(1, 5)) // error
+```
+
+> [!WARNING]
+>
+> 在Vue3的配置文件中默认开启 **skipLibCheck** 所以在.d.ts中的可执行代码不会报错
+>
+> 如需修改
+>
+> 在 **tsconfig.app.json** 中将
+>
+> "CompilerOptions" {
+>
+> ​	"skipLibCheck":false
+>
+> }
+>
+> 添加即可
+
+### 使用类型声明文件
+
+#### 库自带的类型声明文件
+
+在所调用的包中使用类型声明文件，只需import导入对饮包即可，ts会自动在对应包中的package.json中找到typings/types字段所对应的声明文件
+
+#### 由definitelyTyped来提供
+
+有些js库本身没有提供ts类型声明文件，可以通过开源项目definitelyTyped来提供该库对应的类型声明文件
+
+先前需要在TypeScript官网进行查找对应库是否有对应的类型声明文件，现如今npm已经内置该功能了。
+
+### 创建自己的类型声明文件
+
+##### index.d.ts
+
+```typescript
+// 类型声明文件
+
+// 类型
+type Props = { x: number, y: number }
+
+// 模块化语法
+export { Props }
+```
+
+##### index.ts
+
+```typescript
+// 使用模块化语法导入
+import type { Props } from './index'
+
+let p1: Props = {
+  x: 1,
+  y: 2
+}
+```
+
+### 给已开发完成的js文件提供类型声明
+
+在没有为已完成的js文件提供类型声明时，当这些模块导入到ts文件中，ts将会提示
+
+##### index.ts
+
+```typescript
+import {} from './utils.js'
+```
+
+**无法找到模块“./utils.js”的声明文件。“/Users/clearsparkling/Project/DocPlatform/src/types/utils.js”隐式拥有 "any" 类型。**
+
+接下来将展示如何为js文件提供类型声明文件
+
+#### declare关键字
+
+用于类型声明，为其他地方（比如.js文件）已存在的变量类型声明，而不是创建一个新的变量
+
+##### utils.js
+
+```typescript
+let count = 10
+let songName = '冰河时代'
+let position = {
+    x: 0,
+    y: 0
+}
+
+function add(x, y) {
+    return x + y
+}
+
+function changeDirection(direction) {
+    console.log(direction)
+}
+
+const fomartPoint = point => {
+    console.log("当前坐标：", point)
+}
+
+export { count, songName, position, add, changeDirection, fomartPoint }
+```
+
+##### utils.d.ts
+
+```typescript
+declare let count: number
+declare let songName: string
+
+interface Point {
+    x: number,
+    y: number
+}
+declare let position: Point
+
+declare function add(x: number, y: number): number
+
+declare function changeDirection(direction: Point): void
+
+// 箭头函数的类型声明
+// 使用类型别名
+// type FomartPoint = (point: Point) => void
+// declare const fomartPoint: FomartPoint
+
+// 省略类型别名直接声明
+declare const fomartPoint: (point: Point) => void
+
+// 注意：类型提供好以后，需要使用 模块化方案 中提供的
+//      模块化语法，来导出声明好的类型。然后，才能在
+//      其他的 .ts 文件中使用
+export { count, songName, position, add, changeDirection, fomartPoint }
+```
+
+这时候在其他ts文件中导入该js模块错误提示就会消失，同时拥有ts类型
 
 ## Function类型注解
 
