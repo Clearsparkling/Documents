@@ -34,13 +34,60 @@ git pull
 #### 暂存文件
 
 ``` shell
+// 暂存指定文件
 git add <file>
+
+// 暂存所有文件
+git add .
 ```
 
-#### 取消暂存文件
+#### 版本回退
+
+撤销这一次的`git add`,但文件仍被git跟踪，修改还保留在工作区，随时可以`git add`
 
 ``` shell
+# git reset --mixed 版本号 -- 文件名
 git reset HEAD<file>
+```
+
+从版本库中将指定版本恢复到暂存区和工作区
+
+```shell
+# git reset --hard 版本号 -- 文件名
+git reset --hard<file>
+```
+
+从版本库中撤销提交，但修改的内容仍保存在工作区和暂存区中，随时可以重新`commit`
+
+>[!WARNING]
+>
+>此操作只建议在未push到远程分支的commit使用，这会撤销这之中版本的所有提交，如果对远程分支如此使用，会缺少中途的提交记录，此时提交会被拒绝，如需强行提交使用`git push --force-with-lease`，但如果此时已经有人拉取此代码在进行协同开发会问题
+>
+>如需要撤销已经push的commit使用
+>
+>`git revert <version>`
+>
+>会新增一次反向提交拥有完整的提交记录
+
+```shell
+# git reset --soft 版本号 -- 文件名
+git reset --soft <versionhash> -- <file>
+```
+
+在本地reset之后，未来的分支记录依然会保存在本地，如果想撤回该操作可以使用`git reflog`查看所有的分支[查看reflog的完整说明](#查看全部分支提交)
+
+#### 保留本地文件但git不再跟踪
+
+保留本地文件，但让git在下一次提交开始不再跟踪它
+
+```shell
+git rm --cached
+```
+
+#### 从暂存区恢复到工作区
+
+```shell
+git restore <file>
 ```
 
 ### 检查当前文件状态
@@ -162,7 +209,7 @@ git diff HEAD
 git diff <file>
 ```
 
-#### 查看提交历史
+#### 查看日志
 
 ``` shell
 git log
@@ -174,6 +221,17 @@ git log --patch
 # 显示简略的提交信息
 git log -s
 git log --stat	
+
+# 单行显示
+git log --oneline
+```
+
+##### 查看全部分支提交
+
+在我们使用`reset`后，如有需要返回当前HEAD之后的分支，可以使用该命令来查看全部的提交记录
+
+```shell
+git reflog
 ```
 
 ### 分支
@@ -206,3 +264,56 @@ git switch <branch(分支)>
   git config core.ignorecase false
 ```
 
+### 配置提交时姓名与邮箱
+
+```shell
+git config --global user.name "ClearSparkling"
+
+git config --global user.email "clearsparkling@icloud.com"
+```
+
+## Git提交记录规范
+
+`feat`:新功能/新特性
+
+`fix`:bug修复
+
+`docs`:文档、README、注释
+
+`style`:修改样式，并不影响代码逻辑
+
+`refactor`:重构代码，功能不变
+
+`perf`:性能优化
+
+`test`:新增或修改测试
+
+`build`:构建、依赖、打包
+
+`ci`:CI/CD配置
+
+`chore`:杂项，如.gitignore、工具配置
+
+`revert`:撤回某个提交
+
+> [!NOTE]
+>
+> 第一行简述，做了什么，尽可能简洁
+>
+> 使用动词开头，新增、修复、优化、移除、重构等等
+>
+> 一次提交只做一类相对独立的事
+>
+> 不写无意义的信息
+
+具体格式
+
+feat:支持文档历史版本回滚
+
+
+
+\- 保存回滚前内容并创建新版本
+
+\- 使用unified diff展示内容差异
+
+\- 限制用户只能回滚自己的文档
