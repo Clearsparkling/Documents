@@ -19,6 +19,10 @@ git clone <url>
 
 ``` shell
 git remote add <shortname> <url>	
+
+// 首次向远程仓库推送代码
+// 将本地分支与远程分支相关联，以后只需要git push即可
+git push -u origin master
 ```
 
 ### 拉取代码
@@ -27,6 +31,9 @@ git remote add <shortname> <url>
 
 ``` shell
 git pull
+
+// 在没有设置upstream的时候 主动选择从哪里拉去到本地的指定分支
+git pull origin master
 ```
 
 ### 暂存
@@ -246,7 +253,17 @@ git branch
 #### 创建新分支
 
 ``` shell
+# 创建并切换分支
 git switch -c/-create <branch(分支)>
+
+# 单独创建分支
+git branch 分支名
+```
+
+#### 删除分支
+
+```shell
+git branch -d <branch
 ```
 
 #### 切换分支
@@ -254,7 +271,27 @@ git switch -c/-create <branch(分支)>
 ``` shell
 # git2.23引入新特性
 git switch <branch(分支)>
+
+# 旧版本的切换分支
+git checkout <branch>
 ```
+
+#### 分支合并
+
+```shell
+# 切换到要合入的分支
+git switch <branch>
+
+# 合并分支
+git merge <被合并的分支名>
+
+# 删除合并后不需要的分支指针
+git branch -d <branch>
+```
+
+> [!NOTE]
+>
+> 如在合并中产生冲突，需要在VsCode中将冲突解决然后合并
 
 ## Git设置
 
